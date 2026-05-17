@@ -14,3 +14,13 @@ if Level.objects.count() == 0:
 else:
     print(f'Base déjà peuplée ({Level.objects.count()} niveaux) — seed ignoré.')
 "
+
+# Créer le superuser automatiquement si inexistant
+python manage.py shell -c "
+from django.contrib.auth.models import User
+if not User.objects.filter(username='legeny').exists():
+    User.objects.create_superuser('legeny', 'legeny225@gmail.com', 'legeny225')
+    print('Superuser créé : legeny / legeny225')
+else:
+    print('Superuser déjà existant.')
+"
